@@ -1,0 +1,34 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>{% block title %}My shop{% endblock %}</title>
+  </head>
+  <body>
+    <div id="header">
+      <a href="/" class="logo">My shop</a>
+    </div>
+    <br>
+    <div id="subheader">
+      <div class="cart">
+        {% with total_items=cart|length %}
+          {% if cart|length > 0 %}
+          <a href="{% url 'cart:cart_detail' %}">
+            Your Cart:
+          </a>
+          <br>
+              &emsp;Number of items: {{total_items}}
+              <br>
+              &emsp;Total price: ${{cart.get_total_price}}
+          {% else %}
+            &emsp;Your cart is empty
+          {% endif %}
+        {% endwith %}
+      </div>
+    </div>
+    <div id="content">
+      {% block content %}
+      {% endblock %}
+  </body>
+</html>
